@@ -3,7 +3,6 @@ var canvas = document.getElementById("canvas");
 var canvasContext = canvas.getContext('2d');
 var particles = new Array(100);
 
-
 window.onload = ()=>{
 	start();
 	startLoop();
@@ -11,22 +10,21 @@ window.onload = ()=>{
 
 function start(){
 	clear();
-	image('noise.png', 0, 0, canvas.width, canvas.height);
-	for(var i = 0; i < particles.length; i++){
-		particles[i] = new particle(canvas.width/2, canvas.height/2, Math.random() - 0.5, Math.random() - 0.5);
-	}
+	img = image('noise.png', 0, 0, canvas.width, canvas.height);
 	
+	for(var i = 0; i < particles.length; i++){
+		particles[i] = new particle(canvas.width/2, canvas.height/2, 2, vector2.randomNormalized());
+	}
 }
+	
 
 function startLoop(){
-	setInterval(update, 1000/30);
+	setInterval(update, 1000/60);
 }
 
 function update(){
-	//sphere(0,0,200,"red");
-	
-	for(var i = 0; i < particles.length; i++){
-		particles[i].update();
+	for(var i = 0; i < particles.length; i++){		
+		particles[i].update(f);
 	}
 	draw();
 }
@@ -74,4 +72,3 @@ function image(source, x, y, w, h){
 	img.src = source; // Set source path
 	return img;
 }
-
