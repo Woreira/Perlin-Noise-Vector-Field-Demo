@@ -1,39 +1,39 @@
-"use strict";
+
 var canvas = document.getElementById("canvas");
 var canvasContext = canvas.getContext('2d');
+var particles = new Array(100);
 
-
-var px = 0, py = 0;
-const scale = 1;
 
 window.onload = ()=>{
 	start();
-	loop();
+	startLoop();
 }
 
 function start(){
 	clear();
-	
+	image('noise.png', 0, 0, canvas.width, canvas.height);
+	for(var i = 0; i < particles.length; i++){
+		particles[i] = new particle(canvas.width/2, canvas.height/2, Math.random() - 0.5, Math.random() - 0.5);
+	}
 	
 }
 
-function loop(){
-	setInterval(update, 1000/120);
+function startLoop(){
+	setInterval(update, 1000/30);
 }
 
 function update(){
-	draw();
+	//sphere(0,0,200,"red");
 	
+	for(var i = 0; i < particles.length; i++){
+		particles[i].update();
+	}
+	draw();
 }
 
 function draw(){
-	//clear();
-	//sphere(px, py, 10, rgbcolor(px, 0, py));
-	for(var i = 0; i < canvas.width; i++){
-		for(var j = 0; j < canvas.height; j++){
-			
-			sphere(i, j, 2, greyscale(Math.floor(Math.random() * 255)));
-		}
+	for(var i = 0; i < particles.length; i++){
+		particles[i].draw();
 	}
 }
 
@@ -63,5 +63,15 @@ function rgbcolor(r, g, b){
 
 function greyscale(g){
 	return rgbcolor(g, g, g);
+}
+
+function image(source, x, y, w, h){
+	var img = new Image();   // Create new img element
+	img.onload = function(){
+		canvasContext.drawImage(img, x, y, w, h);
+	};
+	
+	img.src = source; // Set source path
+	return img;
 }
 
