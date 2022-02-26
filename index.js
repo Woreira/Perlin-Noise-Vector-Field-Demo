@@ -26,6 +26,7 @@ function startLoop(){
 }
 
 function update(){
+	//clear();
 	for(var i = 0; i < particles.length; i++){
 		var f = noise.perlin2(particles[i].pos.x * period, particles[i].pos.y * period);
 		particles[i].update(f);
