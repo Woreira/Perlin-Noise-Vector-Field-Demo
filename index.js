@@ -1,7 +1,10 @@
 
 var canvas = document.getElementById("canvas");
 var canvasContext = canvas.getContext('2d');
-var particles = new Array(100);
+var particles = new Array(5000);
+
+noise.seed(Math.random());
+var period = 2 / 800;
 
 window.onload = ()=>{
 	start();
@@ -10,10 +13,10 @@ window.onload = ()=>{
 
 function start(){
 	clear();
-	img = image('noise.png', 0, 0, canvas.width, canvas.height);
+	//img = image('noise.png', 0, 0, canvas.width, canvas.height);
 	
 	for(var i = 0; i < particles.length; i++){
-		particles[i] = new particle(canvas.width/2, canvas.height/2, 2, vector2.randomNormalized());
+		particles[i] = new particle(randomRange(0, canvas.width), randomRange(0, canvas.height), 2, vector2.randomNormalized());
 	}
 }
 	
@@ -23,7 +26,8 @@ function startLoop(){
 }
 
 function update(){
-	for(var i = 0; i < particles.length; i++){		
+	for(var i = 0; i < particles.length; i++){
+		var f = noise.perlin2(particles[i].pos.x * period, particles[i].pos.y * period);
 		particles[i].update(f);
 	}
 	draw();
@@ -36,7 +40,7 @@ function draw(){
 }
 
 function clear(){
-	rect(0, 0, canvas.width, canvas.height, "black");
+	rect(0, 0, canvas.width, canvas.height, "white");
 }
 
 function rect(x, y, w, h, c){
@@ -71,4 +75,8 @@ function image(source, x, y, w, h){
 	
 	img.src = source; // Set source path
 	return img;
+}
+
+function randomRange(min, max){
+	return (Math.random() * (max - min)) - min;
 }

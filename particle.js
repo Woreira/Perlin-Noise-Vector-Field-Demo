@@ -12,20 +12,20 @@ class particle{
 	}
 
 	draw(){
-		sphere(this.pos.x, this.pos.y, 2, "red");
+		sphere(this.pos.x, this.pos.y, 0.5, "black");
 	}
 
 	wrapAround(){
-		if(this.pos.x > 1000){
+		if(this.pos.x > canvas.width){
 			this.pos.x = 0;
 		}else if(this.pos.x < 0){
-			this.pos.x = 1000;
+			this.pos.x = canvas.width;
 		}
 
-		if(this.pos.y > 1000){
+		if(this.pos.y > canvas.height){
 			this.pos.y = 0;
 		}else if(this.pos.y < 0){
-			this.pos.y = 1000;
+			this.pos.y = canvas.height;
 		}
 	}
 };
