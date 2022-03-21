@@ -15,6 +15,7 @@ class particle{
 		sphere(this.pos.x, this.pos.y, 0.5, "black");
 	}
 
+	//particles leave on one side, they appear in the other
 	wrapAround(){
 		if(this.pos.x > canvas.width){
 			this.pos.x = 0;
@@ -44,11 +45,12 @@ class vector2{
 		return new vector2(v.x * a, v.y * a);
 	}
 
-	//somewhat normalized
+	//somewhat normalized, no need for dead mathematical precision here
 	static randomNormalized(){
 		return new vector2(Math.random() -0.5, Math.random() -0.5);
 	}
 
+	//gets the angle vector from a scalar
 	static fromAngle(f){
 		return new vector2(Math.cos(f * Math.PI * 2), Math.sin(f * Math.PI * 2));
 	}
