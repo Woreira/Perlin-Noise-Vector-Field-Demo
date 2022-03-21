@@ -13,8 +13,6 @@ window.onload = ()=>{
 
 function start(){
 	clear();
-	//img = image('noise.png', 0, 0, canvas.width, canvas.height);
-	
 	for(var i = 0; i < particles.length; i++){
 		particles[i] = new particle(randomRange(0, canvas.width), randomRange(0, canvas.height), 2, vector2.randomNormalized());
 	}
@@ -22,11 +20,10 @@ function start(){
 	
 
 function startLoop(){
-	setInterval(update, 1000/60);
+	setInterval(update, 1000/60);	//60 fps
 }
 
 function update(){
-	//clear();
 	for(var i = 0; i < particles.length; i++){
 		var f = noise.perlin2(particles[i].pos.x * period, particles[i].pos.y * period);
 		particles[i].update(f);
@@ -66,16 +63,6 @@ function rgbcolor(r, g, b){
 
 function greyscale(g){
 	return rgbcolor(g, g, g);
-}
-
-function image(source, x, y, w, h){
-	var img = new Image();   // Create new img element
-	img.onload = function(){
-		canvasContext.drawImage(img, x, y, w, h);
-	};
-	
-	img.src = source; // Set source path
-	return img;
 }
 
 function randomRange(min, max){
