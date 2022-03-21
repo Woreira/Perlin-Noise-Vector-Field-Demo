@@ -2,7 +2,7 @@
 
 The classic perlin noise vector field visualization, implemented in javascript.  
 
-![Perlin Noise Vector Field](images\PerlinNoiseVectorField.png)  
+![Perlin Noise Vector Field](https://github.com/Woreira/Perlin-Noise-Vector-Field-Demo/blob/main/images/PerlinNoiseVectorField.png)  
 
 heavily inspired by [this](https://josephg.com/perlin/3/)  
 
